@@ -67,6 +67,4 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
             this.feelsLikeTemperatureView = (TextView) view.findViewById(R.id.feels_like_temperature_text);
         }
     }
-
 }
-
