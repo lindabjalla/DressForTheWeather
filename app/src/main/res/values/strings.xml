@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DressForTheWeather</string>
+    <string name="welcome_message">Welcome to Dress for the weather</string>
 </resources>

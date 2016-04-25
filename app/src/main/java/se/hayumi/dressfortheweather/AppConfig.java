@@ -1,4 +1,6 @@
 package se.hayumi.dressfortheweather;
 
-public class NameData {
+public class AppConfig {
+
+
 }
