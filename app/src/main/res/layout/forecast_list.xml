@@ -11,7 +11,7 @@
         android:id="@+id/date_time_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="17sp"
         tools:text="2:00 AM CEST on April 25, 2016"
         android:textColor="@color/textColor"/>
 
@@ -19,7 +19,7 @@
         android:id="@+id/suitable_clothes_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="22sp"
         tools:text="T-shirt"
         android:textColor="@color/textColor"/>
 
@@ -27,7 +27,7 @@
         android:id="@+id/condition_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="22sp"
         tools:text="Partly Cloudy"
         android:textColor="@color/textColor"/>
 
@@ -35,7 +35,7 @@
         android:id="@+id/temperature_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="17sp"
         tools:text="-1°C"
         android:textColor="@color/textColor"/>
 
@@ -43,7 +43,7 @@
         android:id="@+id/feels_like_temperature_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="17sp"
         tools:text="Feels like -4°C"
         android:textColor="@color/textColor"/>
 
