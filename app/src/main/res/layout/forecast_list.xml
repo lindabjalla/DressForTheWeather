@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/date_time_text"
@@ -16,7 +17,7 @@
         android:textColor="@color/textColor"/>
 
     <TextView
-        android:id="@+id/suitable_clothes_text"
+        android:id="@+id/clothes_to_wear_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
