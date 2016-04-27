@@ -1,11 +1,5 @@
 package se.hayumi.dressfortheweather.database;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
-
-import se.hayumi.dressfortheweather.storage.FeedReaderDbHelper;
-
 import android.provider.BaseColumns;
 
 public final class WeatherReaderContract {

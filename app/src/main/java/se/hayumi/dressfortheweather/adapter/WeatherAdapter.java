@@ -34,7 +34,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
     public void onBindViewHolder(WeatherViewHolder holder, int position) {
 
         holder.dateTimeView.setText(weatherList.get(position).getDateTime());
-        holder.clothesToWearView.setText(weatherList.get(position).getClothesToWear().toString());
+        holder.clothesToWearView.setText(weatherList.get(position).getClothesToWear());
         holder.conditionView.setText(weatherList.get(position).getCondition());
         holder.temperatureView.setText(weatherList.get(position).getTemperature());
         holder.feelsLikeTemperatureView.setText(weatherList.get(position).getFeelsLikeTemperature());
