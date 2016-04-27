@@ -7,16 +7,16 @@ import java.util.List;
 public class HourlyForecast {
 
     @SerializedName("hourly_forecast")
-    List<WeatherData> weatherDataList;
+    List<Weather> weatherList;
 
-    public List<WeatherData> getWeatherDataList() {
-        return weatherDataList;
+    public List<Weather> getWeatherList() {
+        return weatherList;
     }
 
     @Override
     public String toString() {
         return "HourlyForecast{" +
-                "weatherDataList=" + weatherDataList +
+                "weatherList=" + weatherList +
                 '}';
     }
 }

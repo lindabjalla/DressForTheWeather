@@ -13,4 +13,12 @@ public class Temperature {
     public int getCelsius() {
         return celsius;
     }
+
+    @Override
+    public String toString() {
+        return "Temperature{" +
+                "fahrenheit=" + fahrenheit +
+                ", celsius=" + celsius +
+                '}';
+    }
 }

@@ -16,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import se.hayumi.dressfortheweather.adapter.WeatherAdapter;
 import se.hayumi.dressfortheweather.model.HourlyForecast;
+import se.hayumi.dressfortheweather.model.Weather;
 import se.hayumi.dressfortheweather.model.WeatherData;
 import se.hayumi.dressfortheweather.service.WeatherService;
 
@@ -42,20 +43,32 @@ public class MainActivity extends AppCompatActivity {
         WeatherService weatherService = retrofit.create(WeatherService.class);
         Call<HourlyForecast> result = weatherService.getHourlyWeather("stockholm.json");
 
+        final List<WeatherData> weatherDataList = new ArrayList<>();
+
         result.enqueue(new Callback<HourlyForecast>() {
 
             @Override
             public void onResponse(Call<HourlyForecast> call, Response<HourlyForecast> response) {
+
                 Log.d(TAG, "***************** " + response.body().toString());
+
+                final List<Weather> weatherList = response.body().getWeatherList();
+
+                for (Weather weather : weatherList) {
+
+                    WeatherData weatherData = new WeatherData(weather.getDateTime(), weather.getCondition(),
+                            weather.getTemperature().getCelsius(), weather.getFeelsLikeTemperature().getCelsius());
+
+                    weatherDataList.add(weatherData);
+                }
             }
 
             @Override
             public void onFailure(Call<HourlyForecast> call, Throwable t) {
-                Log.d(TAG, "Could not fetch user: " + t.getMessage());
+                Log.d(TAG, "Could not fetch HourlyForecast: " + t.getMessage());
             }
         });
 
-        List<WeatherData> weatherList = new ArrayList<>();
 //        WeatherDataSource dataSource = new WeatherDataSource(this);
 //
 //        final WeatherData latestWeather = dataSource.getLatestEntity();
@@ -70,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 //        List<WeatherData> weathersByFetchTimeDesc = dataSource.getWeathersByFetchTimeDesc(currentTime);
 //        weatherList.addAll(weathersByFetchTimeDesc);
 
-        RecyclerView.Adapter adapter = new WeatherAdapter(this, weatherList);
+        RecyclerView.Adapter adapter = new WeatherAdapter(this, weatherDataList);
 
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);

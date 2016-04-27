@@ -13,4 +13,12 @@ public class FeelsLikeTemperature {
     public int getCelsius() {
         return celsius;
     }
+
+    @Override
+    public String toString() {
+        return "FeelsLikeTemperature{" +
+                "fahrenheit=" + fahrenheit +
+                ", celsius=" + celsius +
+                '}';
+    }
 }
