@@ -34,38 +34,38 @@ public class WeatherDataSource {
             WeatherEntry.COLUMN_NAME_FETCH_TIME
     };
 
-    public WeatherData getLatestEntity() {
+//    public WeatherData getLatestEntity() {
+//
+//        Cursor cursor = readableDatabase.query(WeatherEntry.TABLE_NAME,
+//                allColumns, null, null, null, null, WeatherEntry.COLUMN_NAME_FETCH_TIME + " DESC", "1");
+//
+//        cursor.moveToFirst();
+//        WeatherData weather = cursorToWeatherData(cursor);
+//
+//        cursor.close();
+//        return weather;
+//    }
 
-        Cursor cursor = readableDatabase.query(WeatherEntry.TABLE_NAME,
-                allColumns, null, null, null, null, WeatherEntry.COLUMN_NAME_FETCH_TIME + " DESC", "1");
-
-        cursor.moveToFirst();
-        WeatherData weather = cursorToWeatherData(cursor);
-
-        cursor.close();
-        return weather;
-    }
-
-    public List<WeatherData> getWeathersByFetchTimeDesc(String fetchTime){
-
-        List<WeatherData> weatherDataList = new ArrayList<>();
-
-        Cursor cursor = readableDatabase.query(
-                WeatherEntry.TABLE_NAME,
-                allColumns, WeatherEntry.COLUMN_NAME_FETCH_TIME + " = ?",
-                new String[]{ fetchTime }, null, null, WeatherEntry.COLUMN_NAME_FETCH_TIME + " DESC");
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-
-            WeatherData weather = cursorToWeatherData(cursor);
-            weatherDataList.add(weather);
-            cursor.moveToNext();
-        }
-        cursor.close();
-
-        return weatherDataList;
-    }
+//    public List<WeatherData> getWeathersByFetchTimeDesc(String fetchTime){
+//
+//        List<WeatherData> weatherDataList = new ArrayList<>();
+//
+//        Cursor cursor = readableDatabase.query(
+//                WeatherEntry.TABLE_NAME,
+//                allColumns, WeatherEntry.COLUMN_NAME_FETCH_TIME + " = ?",
+//                new String[]{ fetchTime }, null, null, WeatherEntry.COLUMN_NAME_FETCH_TIME + " DESC");
+//
+//        cursor.moveToFirst();
+//        while (!cursor.isAfterLast()) {
+//
+//            WeatherData weather = cursorToWeatherData(cursor);
+//            weatherDataList.add(weather);
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+//
+//        return weatherDataList;
+//    }
 
     public long insertWeather(WeatherData weather){
 
@@ -87,16 +87,16 @@ public class WeatherDataSource {
         return newRowId;
     }
 
-    private WeatherData cursorToWeatherData(Cursor cursor) {
-
-        WeatherData weather = new WeatherData(null, null, -9999, -9999);
-        weather.setEntryId(cursor.getString(0));
-        weather.setDateTime(cursor.getString(1));
-        weather.setCondition(cursor.getString(2));
-        weather.setTemperature(cursor.getInt(3));
-        weather.setFeelsLikeTemperature(cursor.getInt(4));
-        weather.setClothesToWear(cursor.getString(5));
-        weather.setFetchTime(cursor.getString(6));
-        return weather;
-    }
+//    private WeatherData cursorToWeatherData(Cursor cursor) {
+//
+//        WeatherData weather = new WeatherData(null, null, -9999, -9999);
+//        weather.setEntryId(cursor.getString(0));
+//        weather.setDateTime(cursor.getString(1));
+//        weather.setCondition(cursor.getString(2));
+//        weather.setTemperature(cursor.getInt(3));
+//        weather.setFeelsLikeTemperature(cursor.getInt(4));
+//        weather.setClothesToWear(cursor.getString(5));
+//        weather.setFetchTime(cursor.getString(6));
+//        return weather;
+//    }
 }
