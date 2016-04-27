@@ -12,13 +12,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public final class WeatherData {
 
-    private final String entryId;
-    private final String dateTime;
-    private final String condition;
-    private final int temperature;
-    private final int feelsLikeTemperature;
-    private List<String> clothesToWear;
-    private String fetchedTime;
+    private String entryId;
+    private String dateTime;
+    private String condition;
+    private int temperature;
+    private int feelsLikeTemperature;
+    private String clothesToWear;
+    private String fetchTime;
 
     public WeatherData(String dateTime, String condition, int temperature, int feelsLikeTemperature) {
 
@@ -27,18 +27,20 @@ public final class WeatherData {
         this.condition = condition;
         this.temperature = temperature;
         this.feelsLikeTemperature = feelsLikeTemperature;
-        clothesToWear = new ArrayList<>();
-        addSuitableClothes();
-        addUmbrella();
-        Date date = new Date();
-        fetchedTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("sv", "SE")).format(date);
+
+        if (dateTime != null) {
+            addSuitableClothes();
+            addUmbrella();
+            Date date = new Date();
+            fetchTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(date);
+        }
     }
 
     public void addUmbrella() {
 
         if (condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("shower")) {
-
-            clothesToWear.add("umbrella");
+            clothesToWear = clothesToWear.replace("]", "");
+            clothesToWear += ", umbrella]";
         }
     }
 
@@ -46,29 +48,27 @@ public final class WeatherData {
 
         if (feelsLikeTemperature >= 25) {
 
-            clothesToWear.add("T-shirt");
+            clothesToWear = "[T-shirt]";
 
         } else if (feelsLikeTemperature >= 21) {
 
-            clothesToWear.add("long-sleeved shirt");
+            clothesToWear = "[long-sleeved shirt]";
 
         } else if (feelsLikeTemperature >= 15) {
 
-            clothesToWear.add("cardigan");
+            clothesToWear = "[cardigan]";
 
         } else if (feelsLikeTemperature >= 11) {
 
-            clothesToWear.add("knitted sweater");
+            clothesToWear = "[knitted sweater]";
 
         } else if (feelsLikeTemperature >= 5) {
 
-            clothesToWear.add("winter jacket");
+            clothesToWear = "[winter jacket]";
 
         } else if (feelsLikeTemperature <= 4) {
 
-            clothesToWear.add("winter jacket");
-            clothesToWear.add("scarf");
-            clothesToWear.add("mittens");
+            clothesToWear = "[winter jacket, scarf, mittens]";
 
         } else {
 
@@ -86,7 +86,7 @@ public final class WeatherData {
         return dateTime;
     }
 
-    public List<String> getClothesToWear() {
+    public String getClothesToWear() {
 
         return clothesToWear;
     }
@@ -106,9 +106,44 @@ public final class WeatherData {
         return "Feels like " + feelsLikeTemperature + "°C";
     }
 
-    public String getFetchedTime() {
+    public String getFetchTime() {
 
-        return fetchedTime;
+        return fetchTime;
+    }
+
+    public void setEntryId(String entryId) {
+
+        this.entryId = entryId;
+    }
+
+    public void setDateTime(String dateTime) {
+
+        this.dateTime = dateTime;
+    }
+
+    public void setCondition(String condition) {
+
+        this.condition = condition;
+    }
+
+    public void setTemperature(int temperature) {
+
+        this.temperature = temperature;
+    }
+
+    public void setFeelsLikeTemperature(int feelsLikeTemperature) {
+
+        this.feelsLikeTemperature = feelsLikeTemperature;
+    }
+
+    public void setClothesToWear(String clothesToWear) {
+
+        this.clothesToWear = clothesToWear;
+    }
+
+    public void setFetchTime(String fetchTime) {
+
+        this.fetchTime = fetchTime;
     }
 
     @Override
@@ -121,7 +156,7 @@ public final class WeatherData {
         if (other instanceof WeatherData) {
 
             WeatherData otherWeatherData = (WeatherData) other;
-            return entryId.equals(otherWeatherData.getEntryId()) && fetchedTime.equals(otherWeatherData.fetchedTime);
+            return entryId.equals(otherWeatherData.getEntryId()) && fetchTime.equals(otherWeatherData.fetchTime);
         }
         return false;
     }
@@ -131,7 +166,7 @@ public final class WeatherData {
 
         int result = 1;
         result = 37 * result + (entryId != null ? entryId.hashCode() : 0);
-        result = 37 * result + (fetchedTime != null ? fetchedTime.hashCode() : 0);
+        result = 37 * result + (fetchTime != null ? fetchTime.hashCode() : 0);
 
         return result;
     }
@@ -146,7 +181,7 @@ public final class WeatherData {
                 ", temperature=" + temperature +
                 ", feelsLikeTemperature=" + feelsLikeTemperature +
                 ", clothesToWear=" + clothesToWear +
-                ", fetchedTime=" + fetchedTime +
+                ", fetchedTime=" + fetchTime +
                 '}';
     }
 }

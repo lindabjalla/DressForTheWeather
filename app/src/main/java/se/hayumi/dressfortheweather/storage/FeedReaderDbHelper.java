@@ -5,20 +5,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
+
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "DressForTheWeather.db";
 
     public FeedReaderDbHelper(Context context) {
+
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(FeedReaderContract.getSqlCreateEntries());
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         db.execSQL(FeedReaderContract.getSqlDeleteEntries());
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         onUpgrade(db, oldVersion, newVersion);
     }
 }

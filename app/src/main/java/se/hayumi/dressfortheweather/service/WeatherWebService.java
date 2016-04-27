@@ -11,14 +11,17 @@ import com.koushikdutta.ion.Ion;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.hayumi.dressfortheweather.database.WeatherDataSource;
 import se.hayumi.dressfortheweather.model.WeatherData;
 
 public class WeatherWebService{
 
     private final Context context;
+    private final WeatherDataSource dataSource;
 
     public WeatherWebService(Context context) {
         this.context = context;
+        dataSource = new WeatherDataSource(context);
     }
 
     public List<WeatherData> getWeather() {
@@ -33,10 +36,13 @@ public class WeatherWebService{
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
                         System.out.println(result);
-                        final JsonArray hourlyForecastList = result.getAsJsonArray("hourly_forecast");
-                        List<WeatherData> weatherDatas = convertJsonToWeatherData(hourlyForecastList);
+                        final JsonArray hourlyForecastList = result.get("hourly_forecast").getAsJsonArray();
+                        System.out.println(hourlyForecastList);
+                        convertJsonToWeatherData(hourlyForecastList);
+                        List<WeatherData> jsonToWeatherData = convertJsonToWeatherData(hourlyForecastList);
+                        System.out.println(jsonToWeatherData);
+                        weatherList.addAll(jsonToWeatherData);
 
-                        weatherList.addAll(weatherDatas);
                         System.out.println(weatherList);
                     }
                 });
@@ -60,8 +66,8 @@ public class WeatherWebService{
 
             WeatherData weather = new WeatherData(dateTime, condition, temperature, feelsLikeTemperature);
             weatherList.add(weather);
+            dataSource.insertWeather(weather);
         }
-
         return weatherList;
     }
 }

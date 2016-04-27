@@ -1,7 +1,5 @@
 package se.hayumi.dressfortheweather.database;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 public final class WeatherReaderContract {
@@ -9,35 +7,43 @@ public final class WeatherReaderContract {
     public WeatherReaderContract() {}
 
     public static abstract class WeatherEntry implements BaseColumns {
-        public static final String TABLE_NAME = "WeatherData";
-        public static final String WEATHER_ID = "weatherId";
-        public static final String DATE_TIME = "dateTime";
-        public static final String CONDITION = "condition";
-        public static final int TEMPERATURE = 20;
-        public static final int FEELS_LIKE_TEMPERATURE = 25;
-        public static final boolean NEEDS_UMBRELLA = true;
-        public static final String SUITABLE_CLOTHES = "";
+
+        public static final String TABLE_NAME = "Weather";
+        public static final String COLUMN_NAME_ENTRY_ID = "entryId";
+        public static final String COLUMN_NAME_DATE_TIME = "dateTime";
+        public static final String COLUMN_NAME_CONDITION = "condition";
+        public static final String COLUMN_NAME_TEMPERATURE = "temperature";
+        public static final String COLUMN_NAME_FEELS_LIKE_TEMPERATURE = "feelsLikeTemperature";
+        public static final String COLUMN_NAME_CLOTHES_TO_WEAR = "clothesToWear";
+        public static final String COLUMN_NAME_FETCH_TIME = "fetchTime";
     }
 
-    //Metainformation för DataBasen
-    private static final String STRING_TYPE = " text";
-    private static final String INT_TYPE = "integer";
-    private static final String BOOLEAN_TYPE = "boolean";
+    private static final String STRING_TYPE = " TEXT";
+    private static final String INT_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
-    //private static final String SPACE = " ";
+//    private static final String SPACE = " ";
 
     private static final String SQL_CREATE_TABLE_WEATHER =
             "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
-                    WeatherEntry.WEATHER_ID + "INTEGER PRIMARY KEY," +
-                    WeatherEntry.DATE_TIME + " " + STRING_TYPE + COMMA_SEP +
-                    WeatherEntry.CONDITION + " " + STRING_TYPE + COMMA_SEP +
-                    WeatherEntry.TEMPERATURE + " " + INT_TYPE + COMMA_SEP +
-                    WeatherEntry.FEELS_LIKE_TEMPERATURE + " " + INT_TYPE + COMMA_SEP +
-                    WeatherEntry.NEEDS_UMBRELLA + " " + BOOLEAN_TYPE + COMMA_SEP +
-                    WeatherEntry.SUITABLE_CLOTHES + " " + STRING_TYPE + COMMA_SEP + " )";
+                    WeatherEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_ENTRY_ID + STRING_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_DATE_TIME + STRING_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_CONDITION + STRING_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_TEMPERATURE + INT_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_FEELS_LIKE_TEMPERATURE + INT_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_CLOTHES_TO_WEAR + STRING_TYPE + COMMA_SEP +
+                    WeatherEntry.COLUMN_NAME_FETCH_TIME +
+                    " )";
 
 
     private static final String SQL_DELETE_TABLE_WEATHER =
             "DROP TABLE IF EXISTS " + WeatherEntry.TABLE_NAME;
 
+    public static String getSqlCreateEntries() {
+        return SQL_CREATE_TABLE_WEATHER;
+    }
+
+    public static String getSqlDeleteTableWeather() {
+        return SQL_DELETE_TABLE_WEATHER;
+    }
 }
