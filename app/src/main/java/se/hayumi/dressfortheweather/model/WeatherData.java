@@ -1,5 +1,7 @@
 package se.hayumi.dressfortheweather.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.text.SimpleDateFormat;
@@ -13,14 +15,18 @@ import java.util.concurrent.atomic.AtomicLong;
 public final class WeatherData {
 
     private String entryId;
+
+    @SerializedName("pretty")
     private String dateTime;
     private String condition;
-    private int temperature;
-    private int feelsLikeTemperature;
+    @SerializedName("temp")
+    private Temperature temperature;
+    @SerializedName("feelslike")
+    private FeelsLikeTemperature feelsLikeTemperature;
     private String clothesToWear;
     private String fetchTime;
 
-    public WeatherData(String dateTime, String condition, int temperature, int feelsLikeTemperature) {
+    public WeatherData(String dateTime, String condition, Temperature temperature, FeelsLikeTemperature feelsLikeTemperature) {
 
         entryId = RandomStringUtils.randomAlphanumeric(8);
         this.dateTime = dateTime;
@@ -46,27 +52,27 @@ public final class WeatherData {
 
     public void addSuitableClothes() {
 
-        if (feelsLikeTemperature >= 25) {
+        if (feelsLikeTemperature.getCelsius() >= 25) {
 
             clothesToWear = "[T-shirt]";
 
-        } else if (feelsLikeTemperature >= 21) {
+        } else if (feelsLikeTemperature.getCelsius() >= 21) {
 
             clothesToWear = "[long-sleeved shirt]";
 
-        } else if (feelsLikeTemperature >= 15) {
+        } else if (feelsLikeTemperature.getCelsius() >= 15) {
 
             clothesToWear = "[cardigan]";
 
-        } else if (feelsLikeTemperature >= 11) {
+        } else if (feelsLikeTemperature.getCelsius() >= 11) {
 
             clothesToWear = "[knitted sweater]";
 
-        } else if (feelsLikeTemperature >= 5) {
+        } else if (feelsLikeTemperature.getCelsius() >= 5) {
 
             clothesToWear = "[winter jacket]";
 
-        } else if (feelsLikeTemperature <= 4) {
+        } else if (feelsLikeTemperature.getCelsius() <= 4) {
 
             clothesToWear = "[winter jacket, scarf, mittens]";
 
@@ -98,12 +104,12 @@ public final class WeatherData {
 
     public String getTemperature() {
 
-        return temperature + "°C";
+        return temperature.getCelsius() + "°C";
     }
 
     public String getFeelsLikeTemperature() {
 
-        return "Feels like " + feelsLikeTemperature + "°C";
+        return "Feels like " + feelsLikeTemperature.getCelsius() + "°C";
     }
 
     public String getFetchTime() {
@@ -126,12 +132,12 @@ public final class WeatherData {
         this.condition = condition;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(Temperature temperature) {
 
         this.temperature = temperature;
     }
 
-    public void setFeelsLikeTemperature(int feelsLikeTemperature) {
+    public void setFeelsLikeTemperature(FeelsLikeTemperature feelsLikeTemperature) {
 
         this.feelsLikeTemperature = feelsLikeTemperature;
     }
