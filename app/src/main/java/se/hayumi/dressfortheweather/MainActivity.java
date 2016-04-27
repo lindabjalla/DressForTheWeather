@@ -14,7 +14,7 @@ import java.util.Locale;
 import se.hayumi.dressfortheweather.adapter.WeatherAdapter;
 import se.hayumi.dressfortheweather.database.WeatherDataSource;
 import se.hayumi.dressfortheweather.model.WeatherData;
-import se.hayumi.dressfortheweather.service.WeatherWebService;
+import se.hayumi.dressfortheweather.service.WeatherService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(date);
 
         if (latestWeather.getDateTime() == null || !currentTime.equals(latestWeather.getFetchTime())) {
-        WeatherWebService webService = new WeatherWebService(this);
+        WeatherService webService = new WeatherService(this);
         weatherList.addAll(webService.getWeather());
 
         }

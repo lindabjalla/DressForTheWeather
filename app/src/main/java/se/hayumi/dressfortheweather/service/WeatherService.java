@@ -14,12 +14,12 @@ import java.util.List;
 import se.hayumi.dressfortheweather.database.WeatherDataSource;
 import se.hayumi.dressfortheweather.model.WeatherData;
 
-public class WeatherWebService{
+public class WeatherService {
 
     private final Context context;
     private final WeatherDataSource dataSource;
 
-    public WeatherWebService(Context context) {
+    public WeatherService(Context context) {
         this.context = context;
         dataSource = new WeatherDataSource(context);
     }
