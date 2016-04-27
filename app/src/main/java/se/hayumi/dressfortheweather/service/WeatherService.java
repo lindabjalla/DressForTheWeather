@@ -7,8 +7,8 @@ import se.hayumi.dressfortheweather.model.HourlyForecast;
 
 public interface WeatherService {
 
-   @GET("hourly/q/se/{local}")
-   Call<HourlyForecast> getHourlyWeather(@Path("local") String local);
+    @GET("hourly/q/se/{local}")
+    Call<HourlyForecast> getHourlyWeather(@Path("local") String local);
 
 
 //    private final Context context;

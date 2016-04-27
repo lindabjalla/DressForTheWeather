@@ -42,7 +42,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
         if (position % 2 == 0) {
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorBase));
         }
     }
 
