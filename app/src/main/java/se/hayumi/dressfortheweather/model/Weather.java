@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class Weather {
 
-    @SerializedName("pretty")
-    private String dateTime;
+    @SerializedName("FCTTIME")
+    private Time time;
     private String condition;
     @SerializedName("temp")
     private Temperature temperature;
     @SerializedName("feelslike")
     private FeelsLikeTemperature feelsLikeTemperature;
 
-    public String getDateTime() {
-        return dateTime;
+    public Time getDateTime() {
+        return time;
     }
 
     public String getCondition() {
@@ -31,7 +31,7 @@ public class Weather {
     @Override
     public String toString() {
         return "Weather{" +
-                "dateTime='" + dateTime + '\'' +
+                "dateTime='" + time + '\'' +
                 ", condition='" + condition + '\'' +
                 ", temperature=" + temperature +
                 ", feelsLikeTemperature=" + feelsLikeTemperature +
