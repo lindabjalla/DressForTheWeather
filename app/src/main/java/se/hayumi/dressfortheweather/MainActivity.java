@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,20 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Could not fetch HourlyForecast: " + t.getMessage());
             }
         });
-
-//        WeatherDataSource dataSource = new WeatherDataSource(this);
-//
-//        final WeatherData latestWeather = dataSource.getLatestEntity();
-//        Date date = new Date();
-//        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(date);
-//
-//        if (latestWeather.getDateTime() == null || !currentTime.equals(latestWeather.getFetchTime())) {
-//        WeatherService webService = new WeatherService(this);
-//        weatherList.addAll(webService.getWeather());
-//
-//        }
-//        List<WeatherData> weathersByFetchTimeDesc = dataSource.getWeathersByFetchTimeDesc(currentTime);
-//        weatherList.addAll(weathersByFetchTimeDesc);
 
         RecyclerView.Adapter adapter = new WeatherAdapter(this, weatherDataList);
 
