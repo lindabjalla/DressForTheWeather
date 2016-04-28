@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
