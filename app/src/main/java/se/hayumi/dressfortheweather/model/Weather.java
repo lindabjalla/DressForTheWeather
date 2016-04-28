@@ -12,7 +12,7 @@ public class Weather {
     @SerializedName("feelslike")
     private FeelsLikeTemperature feelsLikeTemperature;
 
-    public Time getDateTime() {
+    public Time getTime() {
         return time;
     }
 

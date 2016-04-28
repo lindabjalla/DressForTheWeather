@@ -1,5 +1,8 @@
 package se.hayumi.dressfortheweather.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.util.Locale;
 
 import io.realm.RealmObject;
 
-public class WeatherData extends RealmObject {
+public class WeatherData extends RealmObject implements Parcelable {
 
     private String entryId;
     private String dateTime;
@@ -16,12 +19,12 @@ public class WeatherData extends RealmObject {
     private int temperature;
     private int feelsLikeTemperature;
     private String clothesToWear;
+    private int dateTimeInMilliSeconds;;
     private String fetchTime;
 
-    public WeatherData() {
-    }
+    public WeatherData() {}
 
-    public WeatherData(String dateTime, String condition, int temperature, int feelsLikeTemperature) {
+    public WeatherData(String dateTime, String condition, int temperature, int feelsLikeTemperature, int dateTimeInMilliSeconds) {
 
         entryId = RandomStringUtils.randomAlphanumeric(8);
         this.dateTime = dateTime;
@@ -32,6 +35,47 @@ public class WeatherData extends RealmObject {
         addUmbrella();
         Date date = new Date();
         fetchTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(date);
+        this.dateTimeInMilliSeconds = dateTimeInMilliSeconds;;
+    }
+
+    protected WeatherData(Parcel in) {
+        entryId = in.readString();
+        dateTime = in.readString();
+        condition = in.readString();
+        temperature = in.readInt();
+        feelsLikeTemperature = in.readInt();
+        clothesToWear = in.readString();
+        dateTimeInMilliSeconds = in.readInt();
+        fetchTime = in.readString();
+    }
+
+    public static final Creator<WeatherData> CREATOR = new Creator<WeatherData>() {
+        @Override
+        public WeatherData createFromParcel(Parcel in) {
+            return new WeatherData(in);
+        }
+
+        @Override
+        public WeatherData[] newArray(int size) {
+            return new WeatherData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(entryId);
+        out.writeString(dateTime);
+        out.writeString(condition);
+        out.writeInt(temperature);
+        out.writeInt(feelsLikeTemperature);
+        out.writeString(clothesToWear);
+        out.writeInt(dateTimeInMilliSeconds);
+        out.writeString(fetchTime);
     }
 
     public void addUmbrella() {
@@ -171,15 +215,15 @@ public class WeatherData extends RealmObject {
 
     @Override
     public String toString() {
-
         return "WeatherData{" +
                 "entryId='" + entryId + '\'' +
                 ", dateTime='" + dateTime + '\'' +
                 ", condition='" + condition + '\'' +
                 ", temperature=" + temperature +
                 ", feelsLikeTemperature=" + feelsLikeTemperature +
-                ", clothesToWear=" + clothesToWear +
-                ", fetchedTime=" + fetchTime +
+                ", clothesToWear='" + clothesToWear + '\'' +
+                ", dateTimeInMilliSeconds=" + dateTimeInMilliSeconds +
+                ", fetchTime='" + fetchTime + '\'' +
                 '}';
     }
 }
