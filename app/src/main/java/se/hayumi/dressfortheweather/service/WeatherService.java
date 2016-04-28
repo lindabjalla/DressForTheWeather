@@ -10,6 +10,7 @@ public interface WeatherService {
     @GET("hourly/q/se/{local}")
     Call<HourlyForecast> getHourlyWeather(@Path("local") String local);
 
+    
 
 //    private final Context context;
 //    private final WeatherDataSource dataSource;

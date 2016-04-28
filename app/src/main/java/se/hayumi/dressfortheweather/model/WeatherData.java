@@ -1,18 +1,14 @@
 package se.hayumi.dressfortheweather.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicLong;
 
-public final class WeatherData {
+import io.realm.RealmObject;
+
+public class WeatherData extends RealmObject {
 
     private String entryId;
     private String dateTime;
@@ -21,6 +17,9 @@ public final class WeatherData {
     private int feelsLikeTemperature;
     private String clothesToWear;
     private String fetchTime;
+
+    public WeatherData() {
+    }
 
     public WeatherData(String dateTime, String condition, int temperature, int feelsLikeTemperature) {
 
@@ -39,7 +38,7 @@ public final class WeatherData {
 
         if (condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("shower")) {
             clothesToWear = clothesToWear.replace("]", "");
-            clothesToWear += ", umbrella]";
+            clothesToWear += " and Umbrella]";
         }
     }
 
@@ -51,23 +50,23 @@ public final class WeatherData {
 
         } else if (feelsLikeTemperature >= 21) {
 
-            clothesToWear = "[long-sleeved shirt]";
+            clothesToWear = "[Long-sleeved Shirt]";
 
-        } else if (feelsLikeTemperature >= 15) {
+        } else if (feelsLikeTemperature >= 16) {
 
-            clothesToWear = "[cardigan]";
+            clothesToWear = "[Cardigan or Lightweight Jacket]";
 
         } else if (feelsLikeTemperature >= 11) {
 
-            clothesToWear = "[knitted sweater]";
+            clothesToWear = "[Knitted Sweater or Cotton Coat]";
 
-        } else if (feelsLikeTemperature >= 5) {
+        } else if (feelsLikeTemperature >= 6) {
 
-            clothesToWear = "[winter jacket]";
+            clothesToWear = "[Lined Jacket, Scarf,  Mittens]";
 
-        } else if (feelsLikeTemperature <= 4) {
+        } else if (feelsLikeTemperature <= 5) {
 
-            clothesToWear = "[winter jacket, scarf, mittens]";
+            clothesToWear = "[Padded Coat, Knitted Scarf, Mittens]";
 
         } else {
 
