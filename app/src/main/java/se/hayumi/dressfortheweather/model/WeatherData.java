@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.apache.commons.lang3.RandomStringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -12,6 +13,8 @@ import io.realm.RealmObject;
 
 public class WeatherData extends RealmObject implements Parcelable {
 
+//    @Ignore
+//    private Context context;
     private String entryId;
     private String dateTime;
     private String condition;
@@ -89,26 +92,32 @@ public class WeatherData extends RealmObject implements Parcelable {
 
         if (feelsLikeTemperature >= 25) {
 
+//            clothesToWear = context.getString(R.string.tShirt);
             clothesToWear = "[T-shirt]";
 
         } else if (feelsLikeTemperature >= 21) {
 
-            clothesToWear = "[Long-sleeved Shirt]";
+//            clothesToWear = context.getString(R.string.longSleevedShirt);
+            clothesToWear = "[Long-sleeved Shirt]" ;
 
         } else if (feelsLikeTemperature >= 16) {
 
+//            clothesToWear = context.getString(R.string.cardigan);
             clothesToWear = "[Cardigan or Lightweight Jacket]";
 
         } else if (feelsLikeTemperature >= 11) {
 
+//            clothesToWear = context.getString(R.string.sweater);
             clothesToWear = "[Knitted Sweater or Cotton Coat]";
 
         } else if (feelsLikeTemperature >= 6) {
 
-            clothesToWear = "[Lined Jacket, Scarf,  Mittens]";
+//            clothesToWear = context.getString(R.string.jacket);
+            clothesToWear = "[Lined Jacket, Scarf, Mittens]";
 
         } else if (feelsLikeTemperature <= 5) {
 
+//            clothesToWear = context.getString(R.string.paddedCoat);
             clothesToWear = "[Padded Coat, Knitted Scarf, Mittens]";
 
         } else {
@@ -145,46 +154,6 @@ public class WeatherData extends RealmObject implements Parcelable {
     public String getFeelsLikeTemperature() {
 
         return "Feels like " + feelsLikeTemperature + "°C";
-    }
-
-    public String getFetchTime() {
-
-        return fetchTime;
-    }
-
-    public void setEntryId(String entryId) {
-
-        this.entryId = entryId;
-    }
-
-    public void setDateTime(String dateTime) {
-
-        this.dateTime = dateTime;
-    }
-
-    public void setCondition(String condition) {
-
-        this.condition = condition;
-    }
-
-    public void setTemperature(int temperature) {
-
-        this.temperature = temperature;
-    }
-
-    public void setFeelsLikeTemperature(int feelsLikeTemperature) {
-
-        this.feelsLikeTemperature = feelsLikeTemperature;
-    }
-
-    public void setClothesToWear(String clothesToWear) {
-
-        this.clothesToWear = clothesToWear;
-    }
-
-    public void setFetchTime(String fetchTime) {
-
-        this.fetchTime = fetchTime;
     }
 
     @Override

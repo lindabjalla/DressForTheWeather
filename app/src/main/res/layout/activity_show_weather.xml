@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        tools:context="se.hayumi.dressfortheweather.MainActivity"
+        tools:context=".activity.MainActivity"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by wunderground.com"
+        android:text="@string/poweredBy"
         android:textSize="14sp"
         android:textColor="@color/textColorLight"
         android:background="#00000000"

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Kläder Efter Väder</string>
-    <string name="welcome_message">Välkomen till Kläder efter väder </string>
+    <string name="rain">regn</string>
+    <string name="tShirt">[T-shirt]</string>
+    <string name="longSleevedShirt">[Långärmad Tröja]</string>
+    <string name="cardigan">[Kofta eller Lätt Jacka]</string>
+    <string name="sweater">[Stickad Tröja eller Bomullskappa]</string>
+    <string name="jacket">[Fodrad Jacka, Halsduk, Vantar]</string>
+    <string name="paddedCoat">[Vadderad Kappa, Stickad Halsduk, Vantar]</string>
+    <string name="umbrella"> och paraply]</string>
+    <string name="feelslike">Känns som </string>
 </resources>
