@@ -6,9 +6,12 @@ public class Weather {
 
     @SerializedName("FCTTIME")
     private Time time;
+
     private String condition;
+
     @SerializedName("temp")
     private Temperature temperature;
+
     @SerializedName("feelslike")
     private FeelsLikeTemperature feelsLikeTemperature;
 

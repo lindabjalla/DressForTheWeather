@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Dress For The Weather</string>
     <string name="poweredBy">Powered by wunderground.com</string>
+    <string name="rain">rain</string>
+    <string name="tShirt">[T-shirt]</string>
+    <string name="longSleevedShirt">[Long-sleeved Shirt]</string>
+    <string name="cardigan">[Cardigan or Lightweight Jacket]</string>
+    <string name="sweater">[Knitted Sweater or Cotton Coat]</string>
+    <string name="jacket">[Lined Jacket, Scarf, Mittens]</string>
+    <string name="paddedCoat">[Padded Coat, Knitted Scarf, Mittens]</string>
+    <string name="umbrella">" and Umbrella]"</string>
+    <string name="feelslike">"Feels like "</string>
 </resources>

@@ -1,7 +1,7 @@
-package se.hayumi.dressfortheweather;
+package se.hayumi.dressfortheweather.activity;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,17 +22,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import se.hayumi.dressfortheweather.R;
 import se.hayumi.dressfortheweather.adapter.WeatherAdapter;
 import se.hayumi.dressfortheweather.model.HourlyForecast;
 import se.hayumi.dressfortheweather.model.Weather;
 import se.hayumi.dressfortheweather.model.WeatherData;
 import se.hayumi.dressfortheweather.service.WeatherService;
 
-public class MainActivity extends AppCompatActivity {
+public class ShowWeatherActivity extends AppCompatActivity {
 
     public static final String BASE_URL = "http://api.wunderground.com/api/acac042dd991e6be/";
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = ShowWeatherActivity.class.getSimpleName();
     private static final String WEATHER_KEY = "se.hayumi.dressfortheweather.WEATHER_KEY";
+    private Context context = this;
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -46,22 +48,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        realm = Realm.getDefaultInstance();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_weather);
 
+        realm = Realm.getDefaultInstance();
+        
         String currentTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(new Date());
         List<WeatherData> latestWeatherList = realm.where(WeatherData.class)
-                        .equalTo("fetchTime", currentTime).findAllSorted("dateTimeInMilliSeconds", Sort.ASCENDING);
+                .equalTo("fetchTime", currentTime).findAllSorted("dateTimeInMilliSeconds", Sort.ASCENDING);
 
-        System.out.println("latestWeatherList" + latestWeatherList);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        System.out.println("latestWeatherList" + latestWeatherList);
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_show_weather);
 
         recyclerView = (RecyclerView) findViewById(R.id.names_recycler_view);
         layoutManager = new LinearLayoutManager(this);
 
         if (!latestWeatherList.isEmpty()) {
+
             weatherDataList.addAll(latestWeatherList);
+
         } else {
 
             retrofit = new Retrofit.Builder()
@@ -83,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
                         final WeatherData weatherData = new WeatherData(weather.getTime().getDateTime(), weather.getCondition(),
                                 weather.getTemperature().getCelsius(), weather.getFeelsLikeTemperature().getCelsius(), weather.getTime().getDateTimeInMilliSeconds());
+                        weatherData.addSuitableClothes(context);
+                        weatherData.addUmbrella(context);
 
                         transaction = realm.executeTransactionAsync(new Realm.Transaction() {
                             @Override
@@ -116,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        ArrayList<WeatherData> savedWeatherDataList = savedInstanceState.getParcelableArrayList(WEATHER_KEY);
+        savedInstanceState.getParcelableArrayList(WEATHER_KEY);
     }
 
     @Override

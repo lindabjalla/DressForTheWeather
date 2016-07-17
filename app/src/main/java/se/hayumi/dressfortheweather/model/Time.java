@@ -6,6 +6,7 @@ public final class Time {
 
     @SerializedName("pretty")
     private String dateTime;
+
     @SerializedName("epoch")
     private int dateTimeInMilliSeconds;
 

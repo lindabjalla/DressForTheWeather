@@ -1,14 +1,17 @@
 package se.hayumi.dressfortheweather.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import org.apache.commons.lang3.RandomStringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import io.realm.RealmObject;
+import se.hayumi.dressfortheweather.R;
 
 public class WeatherData extends RealmObject implements Parcelable {
 
@@ -30,8 +33,6 @@ public class WeatherData extends RealmObject implements Parcelable {
         this.condition = condition;
         this.temperature = temperature;
         this.feelsLikeTemperature = feelsLikeTemperature;
-        addSuitableClothes();
-        addUmbrella();
         Date date = new Date();
         fetchTime = new SimpleDateFormat("yyyy-MM-dd HH", new Locale("sv", "SE")).format(date);
         this.dateTimeInMilliSeconds = dateTimeInMilliSeconds;;
@@ -49,6 +50,7 @@ public class WeatherData extends RealmObject implements Parcelable {
     }
 
     public static final Creator<WeatherData> CREATOR = new Creator<WeatherData>() {
+
         @Override
         public WeatherData createFromParcel(Parcel in) {
             return new WeatherData(in);
@@ -77,39 +79,39 @@ public class WeatherData extends RealmObject implements Parcelable {
         out.writeString(fetchTime);
     }
 
-    public void addUmbrella() {
+    public void addUmbrella(Context context) {
 
-        if (condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("shower")) {
+        if (condition.toLowerCase().contains(context.getString(R.string.rain)) || condition.toLowerCase().contains("shower")) {
             clothesToWear = clothesToWear.replace("]", "");
-            clothesToWear += " and Umbrella]";
+            clothesToWear += context.getString(R.string.umbrella);
         }
     }
 
-    public void addSuitableClothes() {
+    public void addSuitableClothes(Context context) {
 
         if (feelsLikeTemperature >= 25) {
 
-            clothesToWear = "[T-shirt]";
+            clothesToWear = context.getString(R.string.tShirt);
 
         } else if (feelsLikeTemperature >= 21) {
 
-            clothesToWear = "[Long-sleeved Shirt]";
+            clothesToWear = context.getString(R.string.longSleevedShirt);
 
         } else if (feelsLikeTemperature >= 16) {
 
-            clothesToWear = "[Cardigan or Lightweight Jacket]";
+            clothesToWear = context.getString(R.string.cardigan);
 
         } else if (feelsLikeTemperature >= 11) {
 
-            clothesToWear = "[Knitted Sweater or Cotton Coat]";
+            clothesToWear = context.getString(R.string.sweater);
 
         } else if (feelsLikeTemperature >= 6) {
 
-            clothesToWear = "[Lined Jacket, Scarf,  Mittens]";
+            clothesToWear = context.getString(R.string.jacket);
 
         } else if (feelsLikeTemperature <= 5) {
 
-            clothesToWear = "[Padded Coat, Knitted Scarf, Mittens]";
+            clothesToWear = context.getString(R.string.paddedCoat);
 
         } else {
 
@@ -142,49 +144,9 @@ public class WeatherData extends RealmObject implements Parcelable {
         return temperature + "°C";
     }
 
-    public String getFeelsLikeTemperature() {
+    public String getFeelsLikeTemperature(Context context) {
 
-        return "Feels like " + feelsLikeTemperature + "°C";
-    }
-
-    public String getFetchTime() {
-
-        return fetchTime;
-    }
-
-    public void setEntryId(String entryId) {
-
-        this.entryId = entryId;
-    }
-
-    public void setDateTime(String dateTime) {
-
-        this.dateTime = dateTime;
-    }
-
-    public void setCondition(String condition) {
-
-        this.condition = condition;
-    }
-
-    public void setTemperature(int temperature) {
-
-        this.temperature = temperature;
-    }
-
-    public void setFeelsLikeTemperature(int feelsLikeTemperature) {
-
-        this.feelsLikeTemperature = feelsLikeTemperature;
-    }
-
-    public void setClothesToWear(String clothesToWear) {
-
-        this.clothesToWear = clothesToWear;
-    }
-
-    public void setFetchTime(String fetchTime) {
-
-        this.fetchTime = fetchTime;
+        return context.getString(R.string.feelslike) + feelsLikeTemperature + "°C";
     }
 
     @Override

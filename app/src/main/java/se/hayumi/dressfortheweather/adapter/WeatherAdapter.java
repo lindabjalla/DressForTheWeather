@@ -25,19 +25,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
 
     @Override
     public WeatherViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.forecast_list, parent, false);
         return new WeatherViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(WeatherViewHolder holder, int position) {
-
         holder.dateTimeView.setText(weatherList.get(position).getDateTime());
         holder.clothesToWearView.setText(weatherList.get(position).getClothesToWear());
         holder.conditionView.setText(weatherList.get(position).getCondition());
         holder.temperatureView.setText(weatherList.get(position).getTemperature());
-        holder.feelsLikeTemperatureView.setText(weatherList.get(position).getFeelsLikeTemperature());
+        holder.feelsLikeTemperatureView.setText(weatherList.get(position).getFeelsLikeTemperature(context));
 
         if (position % 2 == 0) {
             holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
@@ -52,7 +50,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
     }
 
     public static final class WeatherViewHolder extends RecyclerView.ViewHolder {
-
         public final TextView dateTimeView;
         public final TextView clothesToWearView;
         public final TextView conditionView;
@@ -60,7 +57,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
         public final TextView feelsLikeTemperatureView;
 
         public WeatherViewHolder(View view) {
-
             super(view);
             this.dateTimeView = (TextView) view.findViewById(R.id.date_time_text);
             this.clothesToWearView = (TextView) view.findViewById(R.id.clothes_to_wear_text);
